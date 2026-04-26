@@ -86,6 +86,49 @@ curl -X POST http://localhost:8000/predict \
   -d '{"duration": 24, "credit_amount": 5000, "age": 35, "income": 45000}'
 ```
 
+API is live at `http://localhost:8000`  
+Interactive docs at `http://localhost:8000/docs`
+
+## Docker Deployment
+
+```bash
+# Step 1 — Train the model first (must exist before building the image)
+python main.py
+
+# Step 2 — Build the Docker image
+docker build -t credit-risk-mlops .
+
+# Step 3 — Run the container
+docker run --rm -p 8000:8000 credit-risk-mlops
+```
+
+API is live at `http://localhost:8000`
+
+To reuse the same container instead of creating a new one each time:
+
+```bash
+# First time — create a named container
+docker run --name credit-api -p 8000:8000 credit-risk-mlops
+
+# Subsequently — start and stop the existing container
+docker stop credit-api
+docker start credit-api
+```
+
+To check all containers (running and stopped):
+
+```bash
+docker ps -a
+```
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | Health check — confirms model is loaded |
+| POST | `/predict` | Score a single credit application |
+| POST | `/predict/batch` | Score multiple applications at once |
+
 ## Run Tests
 
 ```bash
