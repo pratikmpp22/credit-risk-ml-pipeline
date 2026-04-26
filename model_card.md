@@ -38,8 +38,8 @@
 
 ### Top Features (SHAP)
 
-| Rank | Feature | Mean |SHAP| |
-|------|---------|-------------|
+| Rank | Feature | Mean SHAP |
+|------|---------|-----------|
 | 1 | num__credit_amount | 0.5015 |
 | 2 | cat__checking_status_no checking | 0.4922 |
 | 3 | num__duration | 0.4044 |
